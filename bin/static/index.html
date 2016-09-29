@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>This is blog!!!</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+	<h1>This is my super blog!!!</h1>
+	<p>
+		<a id="post" href="#">POST</a>
+		<a id="get" href="#">GET</a>
+		
+		<div id="container"></div>
+	</p>
+</body>
+
+<script>
+	$('#get').click(function(){
+		$.ajax({
+			type: "GET",
+			cache: false,
+			url: "/getData",
+			data: "",
+			success: function(response) {
+				var html = "";
+				$.each(response, function(i) {
+					html += "id: " + response[i].id + ", name: " + response[i].name 
+					+ ", text: "+response[i].text+", author: "+response[i].author+", created date: "
+					+new Date(response[i].created_date).toLocaleString()+", tags: "+response[i].tags;
+				});
+				$('#container').html(html);
+			}
+		});
+	});
+</script>
+
+</html>
